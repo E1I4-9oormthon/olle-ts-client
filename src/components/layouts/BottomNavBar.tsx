@@ -19,11 +19,34 @@ interface NavNameProps {
 }
 
 export const BottomNavBar = memo(() => {
+  const navItemList = [
+    {
+      name: '홈',
+      activeNavImg: HomeActiveIc,
+      inactiveNavImg: HomeInactiveIc,
+    },
+    {
+      name: '제안하기',
+      activeNavImg: WriteActiveIc,
+      inactiveNavImg: WriteInactiveIc,
+    },
+    {
+      name: '마이페이지',
+      activeNavImg: MyActiveIc,
+      inactiveNavImg: MyInactiveIc,
+    },
+  ];
+
   return (
     <Wrapper>
-      <NavItem activeNavImg={HomeActiveIc} inactiveNavImg={HomeInactiveIc} navName="홈" />
-      <NavItem activeNavImg={WriteActiveIc} inactiveNavImg={WriteInactiveIc} navName="제안하기" />
-      <NavItem activeNavImg={MyActiveIc} inactiveNavImg={MyInactiveIc} navName="마이페이지" />
+      {navItemList.map((navItem) => (
+        <NavItem
+          key={navItem.name}
+          navName={navItem.name}
+          activeNavImg={navItem.activeNavImg}
+          inactiveNavImg={navItem.inactiveNavImg}
+        />
+      ))}
     </Wrapper>
   );
 });
@@ -65,10 +88,12 @@ const NavItemBox = styled.div`
 `;
 
 const NavImage = styled.img`
-  width: 1rem;
+  width: 1.3rem;
+  margin-bottom: 0.5rem;
 `;
 
 const NavName = styled.div<NavNameProps>`
+  font-size: 0.9rem;
   ${({ isHover }) =>
     isHover &&
     `
