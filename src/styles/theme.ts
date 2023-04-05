@@ -9,6 +9,7 @@ const color = {
 };
 
 const layout = {
+  headerHeight: '2rem',
   bottomNavBarHeight: '4.5rem',
 };
 
