@@ -1,3 +1,56 @@
+import styled from 'styled-components';
+
 export const HomePage = () => {
-  return <div>Home Page</div>;
+  return (
+    <Wrapper>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+      <div>Home Page</div>
+    </Wrapper>
+  );
 };
+
+const Wrapper = styled.div``;

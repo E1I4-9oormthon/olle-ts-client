@@ -1,22 +1,26 @@
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import { theme } from 'styles/theme';
+import { Header } from './Header';
+import { BottomNavBar } from './BottomNavBar';
 
 export const Layout = () => {
   return (
-    <>
-      <Main>
-        <Section>
+    <Main>
+      <Section>
+        <Header />
+        <Article>
           <Outlet />
-        </Section>
-      </Main>
-    </>
+        </Article>
+        <BottomNavBar />
+      </Section>
+    </Main>
   );
 };
 
 const Main = styled.main`
   height: 100vh;
-  background: red;
+  background-color: ${theme.color.white};
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -24,9 +28,13 @@ const Main = styled.main`
 `;
 
 const Section = styled.section`
-  min-width: 0;
-  background: blue;
+  background-color: ${theme.color.white};
   width: 100%;
   max-width: 500px;
-  height: calc(100vh - ${theme.layout.bottomNavBarHeight});
+`;
+
+const Article = styled.article`
+  overflow: auto;
+  background-color: ${theme.color.white};
+  height: calc(100vh - ${theme.layout.bottomNavBarHeight} - ${theme.layout.headerHeight});
 `;
