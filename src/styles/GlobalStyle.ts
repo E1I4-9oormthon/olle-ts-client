@@ -29,7 +29,6 @@ const GlobalStyle = createGlobalStyle`
     -ms-user-drag:none; 
     -khtml-user-drag: none;
     -webkit-touch-callout: none;
-    -webkit-touch-callout: none !important;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0); 	
   }
 
