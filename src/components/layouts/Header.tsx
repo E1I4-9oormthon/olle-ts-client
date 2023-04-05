@@ -5,7 +5,7 @@ import { theme } from 'styles/theme';
 import LeftArrowIc from 'assets/icons/left_arrow_ic.png';
 import HorizontalLogoImg from 'assets/images/logo_horizontal_img.png';
 
-interface LeftArrowProps {
+interface LeftArrowIconProps {
   isHidden?: boolean;
 }
 
@@ -13,9 +13,9 @@ export const Header = memo(() => {
   const navigate = useNavigate();
   return (
     <Wrapper>
-      <LeftArrow src={LeftArrowIc} onClick={() => navigate(-1)} />
-      <HorizontalLogo src={HorizontalLogoImg} />
-      <LeftArrow src={LeftArrowIc} isHidden={true} />
+      <LeftArrowIcon src={LeftArrowIc} onClick={() => navigate(-1)} />
+      <HorizontalLogoImage src={HorizontalLogoImg} />
+      <LeftArrowIcon src={LeftArrowIc} isHidden={true} />
     </Wrapper>
   );
 });
@@ -28,7 +28,7 @@ const Wrapper = styled.header`
   height: ${theme.layout.headerHeight};
 `;
 
-const LeftArrow = styled.img<LeftArrowProps>`
+const LeftArrowIcon = styled.img<LeftArrowIconProps>`
   ${({ isHidden }) =>
     isHidden &&
     `
@@ -39,6 +39,6 @@ const LeftArrow = styled.img<LeftArrowProps>`
   height: 1rem;
 `;
 
-const HorizontalLogo = styled.img`
+const HorizontalLogoImage = styled.img`
   width: 10rem;
 `;
