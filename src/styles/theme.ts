@@ -8,10 +8,14 @@ const color = {
   lightGrey: '#D9D9D9',
 };
 
-const layout = {};
+const layout = {
+  headerHeight: '3rem',
+  bottomNavBarHeight: '4rem',
+};
 
 const device = {};
 
 export const theme = {
   color,
+  layout,
 };
