@@ -9,8 +9,8 @@ const color = {
 };
 
 const layout = {
-  headerHeight: '2rem',
-  bottomNavBarHeight: '4.5rem',
+  headerHeight: '3rem',
+  bottomNavBarHeight: '4rem',
 };
 
 const device = {};
