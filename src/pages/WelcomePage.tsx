@@ -1,15 +1,32 @@
 import styled from 'styled-components';
 import TitleImg from 'assets/images/logo_full_img.png';
 import KakaoLoginButtonImg from 'assets/images/kakao_signin_button_img.png';
+import { Modal } from 'components/common/Modal';
+import useModal from 'hooks/useModal';
+import { Button } from 'components/common/Button';
 
 export const WelcomePage = () => {
+  const { isOpen, toggleModal } = useModal();
+
+  const handleModalConfirmButton = () => {
+    location.href = import.meta.env.VITE_KAKAO_AUTH_URL;
+    toggleModal();
+  };
+
   return (
     <Wrapper>
       <Box>
         <TitleImage src={TitleImg} />
-        <a href={import.meta.env.VITE_KAKAO_AUTH_URL}>
-          <KakaoSignInButtonImage src={KakaoLoginButtonImg} />
-        </a>
+        <KakaoSignInButtonImage src={KakaoLoginButtonImg} onClick={toggleModal} />
+        <Modal isOpen={isOpen} toggle={toggleModal}>
+          <ModalBodyWrapper>
+            <ModalTitle>카카오 로그인 시 '성별'과 '연령대' 제공에 동의해주세요!</ModalTitle>
+            <ModalContents>
+              비동의 시 '성별'과 '연령대'가 '상관 없음'으로 선택된 동행 제안만 받아보실 수 있습니다.
+            </ModalContents>
+            <Button name="확인" isActivated={true} handleClick={handleModalConfirmButton} />
+          </ModalBodyWrapper>
+        </Modal>
       </Box>
     </Wrapper>
   );
@@ -40,5 +57,26 @@ const TitleImage = styled.img`
 `;
 
 const KakaoSignInButtonImage = styled.img`
-  width: 100%;
+  width: 60%;
+  min-width: 100px;
+  max-width: 230px;
+`;
+
+const ModalBodyWrapper = styled.div`
+  padding: 1.5rem;
+  letter-spacing: 1.5px;
+  line-height: 1.2;
+`;
+
+const ModalTitle = styled.div`
+  font-size: 1.5rem;
+  font-weight: 600;
+  white-space: pre-wrap;
+  margin-bottom: 1rem;
+`;
+
+const ModalContents = styled.div`
+  font-size: 1.3rem;
+  white-space: pre-wrap;
+  margin-bottom: 2.5rem;
 `;
