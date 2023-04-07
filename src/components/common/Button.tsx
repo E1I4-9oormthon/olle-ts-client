@@ -1,15 +1,15 @@
 import { memo } from 'react';
 import styled from 'styled-components';
-import { theme } from '../../styles/theme';
+import { theme } from 'styles/theme';
 
 interface ButtonProps {
-  handleClick: () => void;
-  name: string;
-  isActivated: boolean;
+  handleClick?: () => void;
+  name?: string;
+  isActivated?: boolean;
 }
 
 interface ButtonBoxProps {
-  isActivated: boolean;
+  isActivated?: boolean;
 }
 
 export const Button = memo(({ handleClick, name, isActivated }: ButtonProps) => {
