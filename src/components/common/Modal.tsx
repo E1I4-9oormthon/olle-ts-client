@@ -34,9 +34,7 @@ const Overlay = styled.div`
 
 const ModalBox = styled.div`
   background: ${theme.color.white};
-  width: 80%;
   max-width: 430px;
-  height: 70%;
   padding: 1rem;
   border-radius: 25px;
 `;
