@@ -60,6 +60,7 @@ const KakaoSignInButtonImage = styled.img`
   width: 60%;
   min-width: 100px;
   max-width: 230px;
+  cursor: pointer;
 `;
 
 const ModalBodyWrapper = styled.div`
