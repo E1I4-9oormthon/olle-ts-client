@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { ModifiableMemberInfo } from 'global/types';
 
 const member = {
   getMemberInfo: async () => {
@@ -10,6 +11,13 @@ const member = {
         code: 500,
         message: 'CANNOT_GET_MEMBER_INFO_FROM_SERVER',
       };
+    }
+  },
+  modifyMemberInfo: async (data: ModifiableMemberInfo) => {
+    try {
+      await axios.patch(`/member/info`, data, { withCredentials: true });
+    } catch {
+      throw { code: 500, message: 'CANNOT_MODIFY_MEMBER_INFO' };
     }
   },
 };
