@@ -7,3 +7,7 @@ export interface Member {
   age_range: number;
   prefer_travel: number;
 }
+
+export interface ModifiableMemberInfo {
+  prefer_travel: number;
+}
