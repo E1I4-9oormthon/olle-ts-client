@@ -5,15 +5,19 @@ import { theme } from 'styles/theme';
 import LeftArrowIc from 'assets/icons/left_arrow_ic.png';
 import HorizontalLogoImg from 'assets/images/logo_horizontal_img.png';
 
+interface HeaderProps {
+  isBackButtonHidden?: boolean;
+}
+
 interface LeftArrowIconProps {
   isHidden?: boolean;
 }
 
-export const Header = memo(() => {
+export const Header = memo(({ isBackButtonHidden }: HeaderProps) => {
   const navigate = useNavigate();
   return (
     <Wrapper>
-      <LeftArrowIcon src={LeftArrowIc} onClick={() => navigate(-1)} />
+      <LeftArrowIcon src={LeftArrowIc} onClick={() => navigate(-1)} isHidden={isBackButtonHidden} />
       <HorizontalLogoImage src={HorizontalLogoImg} />
       <LeftArrowIcon src={LeftArrowIc} isHidden={true} />
     </Wrapper>
