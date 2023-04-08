@@ -8,6 +8,16 @@ export const Layout = () => {
   return (
     <Main>
       <Section>
+        <Outlet />
+      </Section>
+    </Main>
+  );
+};
+
+export const HeaderBottomNavBarLayout = () => {
+  return (
+    <Main>
+      <Section>
         <Header />
         <Article>
           <Outlet />
