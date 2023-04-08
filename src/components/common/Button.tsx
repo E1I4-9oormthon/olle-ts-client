@@ -29,8 +29,11 @@ export const Button = memo(({ handleClick, name, isActivated }: ButtonProps) => 
   );
 });
 
-const ButtonBox = styled.div<ButtonBoxProps>`
+const ButtonBox = styled.button<ButtonBoxProps>`
+  width: 100%;
   padding: 1rem;
+  font-family: 'Pretendard-Regular', sans-serif;
+  font-size: 1rem;
   border-radius: 15px;
   display: flex;
   align-items: center;
