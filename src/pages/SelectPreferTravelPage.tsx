@@ -32,12 +32,14 @@ export const SelectPreferTravelPage = () => {
           <BorderButton
             handleClick={() => handlePreferTravelButtonClick(1)}
             name="혼자서 안전하게"
+            nameAlign="left"
             isClicked={preference === 1}
             value={1}
           />
           <BorderButton
             handleClick={() => handlePreferTravelButtonClick(2)}
             name="말동무와 도란도란"
+            nameAlign="left"
             isClicked={preference === 2}
             value={2}
           />

@@ -7,22 +7,27 @@ interface BorderButtonProps {
   name?: string;
   isClicked?: boolean;
   value: number;
+  nameAlign?: string;
 }
 
 interface BorderButtonBoxProps {
   isClicked?: boolean;
+  nameAlign?: string;
 }
 
-export const BorderButton = memo(({ handleClick, name, isClicked, value }: BorderButtonProps) => {
+export const BorderButton = memo(({ handleClick, name, isClicked, value, nameAlign }: BorderButtonProps) => {
   return (
-    <BorderButtonBox onClick={() => handleClick(value)} isClicked={isClicked}>
+    <BorderButtonBox onClick={() => handleClick(value)} isClicked={isClicked} nameAlign={nameAlign}>
       {name}
     </BorderButtonBox>
   );
 });
 
-const BorderButtonBox = styled.div<BorderButtonBoxProps>`
+const BorderButtonBox = styled.button<BorderButtonBoxProps>`
   border: 2px solid ${theme.color.grey};
+  width: 100%;
+  font-size: 1rem;
+  font-family: 'Pretendard-Regular', sans-serif;
   color: ${theme.color.grey};
   &:hover {
     border: 2px solid ${theme.color.primary} !important;
@@ -36,7 +41,11 @@ const BorderButtonBox = styled.div<BorderButtonBoxProps>`
     font-weight: 700;
     color: ${theme.color.black};
 `}
-
+  ${({ nameAlign }) =>
+    nameAlign &&
+    `    
+    text-align: ${nameAlign};
+`}
   border-radius: 8px;
   padding: 1rem;
   margin: 1rem 0 0;
