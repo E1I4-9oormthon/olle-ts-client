@@ -5,6 +5,7 @@ import { Button } from 'components/common/Button';
 import { theme } from 'styles/theme';
 import { Header } from 'components/layouts/Header';
 import { BorderButton } from 'components/common/BorderButton';
+import { member } from 'apis/member';
 
 export const SelectPreferTravelPage = () => {
   const [preference, setPreference] = useState<number>(100);
@@ -19,8 +20,8 @@ export const SelectPreferTravelPage = () => {
   };
 
   const handleSubmitButtonClick = async () => {
-    // TODO: api request
-    navigate('/main');
+    await member.modifyMemberInfo({ prefer_travel: preference });
+    navigate('/olle-list');
   };
 
   return (
