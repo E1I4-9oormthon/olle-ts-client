@@ -5,6 +5,7 @@ import { theme } from 'styles/theme';
 interface ButtonProps {
   handleClick?: () => void;
   name?: string;
+  type?: 'button' | 'submit' | 'reset';
   isActivated?: boolean;
 }
 
@@ -12,9 +13,10 @@ interface ButtonBoxProps {
   isActivated?: boolean;
 }
 
-export const Button = memo(({ handleClick, name, isActivated }: ButtonProps) => {
+export const Button = memo(({ handleClick, name, isActivated, type }: ButtonProps) => {
   return (
     <ButtonBox
+      type={type}
       onClick={
         isActivated
           ? handleClick
