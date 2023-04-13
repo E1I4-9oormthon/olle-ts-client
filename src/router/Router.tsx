@@ -3,6 +3,7 @@ import { WelcomePage } from 'pages/WelcomePage';
 import { Layout, HeaderBottomNavBarLayout } from 'components/layouts/Layout';
 import { SelectPreferTravelPage } from 'pages/SelectPreferTravelPage';
 import { OlleListPage } from 'pages/OlleListPage';
+import { OlleWritePage } from 'pages/OlleWritePage';
 
 export const Router = () => {
   return (
@@ -14,6 +15,7 @@ export const Router = () => {
         </Route>
         <Route element={<HeaderBottomNavBarLayout />}>
           <Route path="/olle-list" element={<OlleListPage />} />
+          <Route path="/olle-write" element={<OlleWritePage />} />
         </Route>
       </Routes>
     </BrowserRouter>
