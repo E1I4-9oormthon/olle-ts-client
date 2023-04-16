@@ -1,26 +1,21 @@
+import { Input } from 'components/Input';
 import styled from 'styled-components';
 
 export const OlleWritePage = () => {
   return (
     <Wrapper>
-      <Box></Box>
+      <Box>
+        <Input title="제목을 입력하세요" placeholder="동행 제목을 입력해주세요" />
+      </Box>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  height: 100%;
+  min-height: 100%;
   padding: 3rem 2rem;
 `;
 
 const Box = styled.div`
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
 `;
