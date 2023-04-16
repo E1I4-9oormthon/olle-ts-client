@@ -30,20 +30,24 @@ export const SelectPreferTravelPage = () => {
         <Header isBackButtonHidden={true} />
         <Box>
           <PreferenceSelectTitle>어떤 동행을 선호하세요?</PreferenceSelectTitle>
-          <BorderButton
-            handleClick={() => handlePreferTravelButtonClick(1)}
-            name="혼자서 안전하게"
-            nameAlign="left"
-            isClicked={preference === 1}
-            value={1}
-          />
-          <BorderButton
-            handleClick={() => handlePreferTravelButtonClick(2)}
-            name="말동무와 도란도란"
-            nameAlign="left"
-            isClicked={preference === 2}
-            value={2}
-          />
+          <ButtonWrapper>
+            <BorderButton
+              handleClick={() => handlePreferTravelButtonClick(1)}
+              name="혼자서 안전하게"
+              nameAlign="left"
+              isClicked={preference === 1}
+              value={1}
+            />
+          </ButtonWrapper>
+          <ButtonWrapper>
+            <BorderButton
+              handleClick={() => handlePreferTravelButtonClick(2)}
+              name="말동무와 도란도란"
+              nameAlign="left"
+              isClicked={preference === 2}
+              value={2}
+            />
+          </ButtonWrapper>
         </Box>
       </Wrapper>
       <SubmitButtonWrapper>
@@ -75,7 +79,11 @@ const Box = styled.div`
 const PreferenceSelectTitle = styled.div`
   font-weight: 700;
   font-size: 18px;
-  padding: 0.5rem 0;
+  margin: 1rem 0 1.5rem;
+`;
+
+const ButtonWrapper = styled.div`
+  margin-bottom: 0.5rem;
 `;
 
 const SubmitButtonWrapper = styled.div`
