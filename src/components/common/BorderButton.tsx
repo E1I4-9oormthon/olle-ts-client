@@ -48,5 +48,4 @@ const BorderButtonBox = styled.button<BorderButtonBoxProps>`
 `}
   border-radius: 8px;
   padding: 1rem;
-  margin: 1rem 0 0;
 `;
