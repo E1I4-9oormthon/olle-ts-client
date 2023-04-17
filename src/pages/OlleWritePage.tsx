@@ -6,7 +6,12 @@ import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 
 export const OlleWritePage = () => {
+  const [gender, setGender] = useState<number>(0);
   const [date, setDate] = useState<Date | undefined>(new Date());
+
+  const handleGenderButtonClick = (value: number) => {
+    setGender(value);
+  };
 
   const handleDateSelect = (selectedDate: Date | undefined) => {
     setDate(selectedDate);
@@ -21,29 +26,32 @@ export const OlleWritePage = () => {
         <ButtonContainer>
           <ButtonWrapper>
             <BorderButton
-              handleClick={() => console.log(1)}
+              handleClick={() => handleGenderButtonClick(1)}
               name="여성"
               nameAlign="center"
-              isClicked={true}
+              isClicked={gender === 1}
               value={1}
+              type="button"
             />
           </ButtonWrapper>
           <ButtonWrapper>
             <BorderButton
-              handleClick={() => console.log(1)}
+              handleClick={() => handleGenderButtonClick(2)}
               name="남성"
               nameAlign="center"
-              isClicked={true}
-              value={1}
+              isClicked={gender === 2}
+              value={2}
+              type="button"
             />
           </ButtonWrapper>
           <ButtonWrapper>
             <BorderButton
-              handleClick={() => console.log(1)}
+              handleClick={() => handleGenderButtonClick(0)}
               name="상관없어요"
               nameAlign="center"
-              isClicked={true}
-              value={1}
+              isClicked={gender === 0}
+              value={0}
+              type="button"
             />
           </ButtonWrapper>
         </ButtonContainer>
@@ -51,6 +59,7 @@ export const OlleWritePage = () => {
         <DayPickerWrapper>
           <DayPicker mode="single" selected={date} onSelect={(selectedDate) => handleDateSelect(selectedDate)} />
         </DayPickerWrapper>
+        <InputTitle>동행과 함께할 올레길을 선택해 주세요</InputTitle>
       </OlleForm>
     </Wrapper>
   );
