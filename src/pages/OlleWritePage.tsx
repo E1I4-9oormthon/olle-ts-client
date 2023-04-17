@@ -1,8 +1,17 @@
+import { useState } from 'react';
 import { Input } from 'components/common/Input';
 import { BorderButton } from 'components/common/BorderButton';
 import styled from 'styled-components';
+import { DayPicker } from 'react-day-picker';
+import 'react-day-picker/dist/style.css';
 
 export const OlleWritePage = () => {
+  const [date, setDate] = useState<Date | undefined>(new Date());
+
+  const handleDateSelect = (selectedDate: Date | undefined) => {
+    setDate(selectedDate);
+  };
+
   return (
     <Wrapper>
       <OlleForm>
@@ -38,6 +47,10 @@ export const OlleWritePage = () => {
             />
           </ButtonWrapper>
         </ButtonContainer>
+        <InputTitle>동행과 함께할 날짜를 선택해 주세요</InputTitle>
+        <DayPickerWrapper>
+          <DayPicker mode="single" selected={date} onSelect={(selectedDate) => handleDateSelect(selectedDate)} />
+        </DayPickerWrapper>
       </OlleForm>
     </Wrapper>
   );
@@ -65,4 +78,9 @@ const ButtonContainer = styled.div`
 
 const ButtonWrapper = styled.div`
   width: calc(90% / 3);
+`;
+
+const DayPickerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
 `;
