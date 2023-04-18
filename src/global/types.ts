@@ -11,3 +11,8 @@ export interface Member {
 export interface ModifiableMemberInfo {
   prefer_travel: number;
 }
+
+export interface Option {
+  index: number;
+  name: string;
+}
