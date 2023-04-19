@@ -16,3 +16,9 @@ export interface Option {
   index: number;
   name: string;
 }
+
+declare global {
+  interface Window {
+    kakao: any;
+  }
+}
