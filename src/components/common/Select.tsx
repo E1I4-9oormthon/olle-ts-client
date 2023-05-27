@@ -13,8 +13,8 @@ export default function Select({ optionList, handleChange, value, name }: Select
   return (
     <SelectBox onChange={(e) => handleChange(e)} value={value} name={name}>
       {optionList &&
-        optionList.map((option) => (
-          <Option key={option.index} value={option.index}>
+        optionList.map((option, index) => (
+          <Option key={option.index} value={index}>
             {option.name}
           </Option>
         ))}
