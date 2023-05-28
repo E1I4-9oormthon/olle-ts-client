@@ -38,10 +38,18 @@ export const OlleMap = memo(({ selectedCourseIndex }: OlleMapProps) => {
     if (status === window.kakao.maps.services.Status.OK) {
       const bounds = new window.kakao.maps.LatLngBounds();
       for (let i = 0; i < data.length; i++) {
+        displayPlaceMarker(data[i]);
         bounds.extend(new window.kakao.maps.LatLng(data[i].y, data[i].x));
       }
       map.setBounds(bounds);
     }
+  };
+
+  const displayPlaceMarker = (place: { x: number; y: number; place_name: string }) => {
+    const marker = new window.kakao.maps.Marker({
+      map: map,
+      position: new window.kakao.maps.LatLng(place.y, place.x),
+    });
   };
 
   useEffect(() => {
