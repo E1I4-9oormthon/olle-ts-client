@@ -1,7 +1,12 @@
 import { useEffect, memo } from 'react';
 import styled from 'styled-components';
+import { courseData } from 'data/courseData';
 
-export const OlleMap = memo(() => {
+interface OlleMapProps {
+  selectedCourseIndex: number;
+}
+
+export const OlleMap = memo(({ selectedCourseIndex }: OlleMapProps) => {
   let map: any;
   const createMap = () => {
     const mapContainer = document.getElementById('map'),
@@ -24,11 +29,27 @@ export const OlleMap = memo(() => {
     map.addControl(zoomControl, window.kakao.maps.ControlPosition.RIGHT);
   };
 
+  const searchKeyword = () => {
+    const ps = new window.kakao.maps.services.Places();
+    ps.keywordSearch(courseData[selectedCourseIndex].name, placesSearchCB);
+  };
+
+  const placesSearchCB = (data: any, status: any) => {
+    if (status === window.kakao.maps.services.Status.OK) {
+      const bounds = new window.kakao.maps.LatLngBounds();
+      for (let i = 0; i < data.length; i++) {
+        bounds.extend(new window.kakao.maps.LatLng(data[i].y, data[i].x));
+      }
+      map.setBounds(bounds);
+    }
+  };
+
   useEffect(() => {
     createMap();
     addMapTypeControl();
     addZoomControl();
-  }, []);
+    searchKeyword();
+  }, [selectedCourseIndex]);
 
   return (
     <>

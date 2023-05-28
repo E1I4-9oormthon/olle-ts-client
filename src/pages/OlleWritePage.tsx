@@ -7,6 +7,7 @@ import 'react-day-picker/dist/style.css';
 import Select from 'components/common/Select';
 import { courseData } from 'data/courseData';
 import { Point } from 'global/types';
+import { OlleMap } from 'components/OlleWritePage/OlleMap';
 
 export const OlleWritePage = () => {
   const [gender, setGender] = useState<number>(0);
@@ -24,10 +25,6 @@ export const OlleWritePage = () => {
 
   const handleCourseChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCourse(parseInt(e.target.value));
-  };
-
-  const updateRoute = (newRoute: { lat: number; lng: number }[]) => {
-    setRoute(newRoute);
   };
 
   return (
@@ -74,6 +71,7 @@ export const OlleWritePage = () => {
         </DayPickerWrapper>
         <InputTitle>동행과 함께할 올레길을 선택해 주세요</InputTitle>
         <Select name="kind" optionList={courseData} handleChange={(e) => handleCourseChange(e)} value={course} />
+        <OlleMap selectedCourseIndex={course} />
       </OlleForm>
     </Wrapper>
   );
