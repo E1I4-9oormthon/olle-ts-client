@@ -2,12 +2,14 @@ import { useEffect, memo } from 'react';
 import styled from 'styled-components';
 import { courseData } from 'data/courseData';
 import { theme } from 'styles/theme';
+import { Point } from 'global/types';
 
 interface OlleMapProps {
   selectedCourseIndex: number;
+  setRoute: React.Dispatch<React.SetStateAction<Point[]>>;
 }
 
-export const OlleMap = memo(({ selectedCourseIndex }: OlleMapProps) => {
+export const OlleMap = memo(({ selectedCourseIndex, setRoute }: OlleMapProps) => {
   let map: any;
   const infoWindow = new window.kakao.maps.InfoWindow({ zIndex: 1 });
   let markers: any[] = [];
@@ -36,6 +38,8 @@ export const OlleMap = memo(({ selectedCourseIndex }: OlleMapProps) => {
     });
     marker.setMap(map);
     markers.push(marker);
+    setRoute((prev) => [...prev, { lat: marker.getPosition().getLat(), lng: marker.getPosition().getLng() }]);
+
     window.kakao.maps.event.addListener(marker, 'mouseover', () => {
       infoWindow.setContent(
         '<div style="padding:5px;font-size:12px;">' + nameRouteMarker(markers.indexOf(marker)) + '</div>',
@@ -104,6 +108,7 @@ export const OlleMap = memo(({ selectedCourseIndex }: OlleMapProps) => {
   const deleteMarkers = () => {
     setMarkers(null);
     markers = [];
+    setRoute([]);
   };
 
   useEffect(() => {
