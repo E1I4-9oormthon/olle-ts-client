@@ -17,6 +17,11 @@ export interface Option {
   name: string;
 }
 
+export interface Point {
+  lat: number;
+  lng: number;
+}
+
 declare global {
   interface Window {
     kakao: any;
