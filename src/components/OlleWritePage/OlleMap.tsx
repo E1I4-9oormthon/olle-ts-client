@@ -95,6 +95,17 @@ export const OlleMap = memo(({ selectedCourseIndex }: OlleMapProps) => {
     });
   };
 
+  const setMarkers = (map: any) => {
+    for (let i = 0; i < markers.length; i++) {
+      markers[i].setMap(map);
+    }
+  };
+
+  const deleteMarkers = () => {
+    setMarkers(null);
+    markers = [];
+  };
+
   useEffect(() => {
     createMap();
     addMapTypeControl();
@@ -105,7 +116,7 @@ export const OlleMap = memo(({ selectedCourseIndex }: OlleMapProps) => {
   return (
     <Wrapper>
       <Map id="map"></Map>
-      <RouteMarkersDeleteButton>지점 초기화</RouteMarkersDeleteButton>
+      <RouteMarkersDeleteButton onClick={deleteMarkers}>지점 초기화</RouteMarkersDeleteButton>
     </Wrapper>
   );
 });
