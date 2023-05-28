@@ -9,6 +9,7 @@ interface OlleMapProps {
 export const OlleMap = memo(({ selectedCourseIndex }: OlleMapProps) => {
   let map: any;
   const infoWindow = new window.kakao.maps.InfoWindow({ zIndex: 1 });
+  let markers: any[] = [];
 
   const createMap = () => {
     const mapContainer = document.getElementById('map'),
@@ -19,6 +20,21 @@ export const OlleMap = memo(({ selectedCourseIndex }: OlleMapProps) => {
       };
 
     map = new window.kakao.maps.Map(mapContainer, mapOption);
+    window.kakao.maps.event.addListener(map, 'click', (mouseEvent: { latLng: number }) => {
+      addRouteMarker(mouseEvent.latLng);
+    });
+  };
+
+  const addRouteMarker = (position: any) => {
+    if (markers.length >= 2) {
+      return;
+    }
+
+    const marker = new window.kakao.maps.Marker({
+      position: position,
+    });
+    marker.setMap(map);
+    markers.push(marker);
   };
 
   const addMapTypeControl = () => {
