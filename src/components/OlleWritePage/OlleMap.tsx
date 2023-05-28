@@ -1,6 +1,7 @@
 import { useEffect, memo } from 'react';
 import styled from 'styled-components';
 import { courseData } from 'data/courseData';
+import { theme } from 'styles/theme';
 
 interface OlleMapProps {
   selectedCourseIndex: number;
@@ -102,13 +103,31 @@ export const OlleMap = memo(({ selectedCourseIndex }: OlleMapProps) => {
   }, [selectedCourseIndex]);
 
   return (
-    <>
+    <Wrapper>
       <Map id="map"></Map>
-    </>
+      <RouteMarkersDeleteButton>지점 초기화</RouteMarkersDeleteButton>
+    </Wrapper>
   );
 });
+
+const Wrapper = styled.div`
+  position: relative;
+`;
 
 const Map = styled.div`
   height: 500px;
   border-radius: 10px;
+`;
+
+const RouteMarkersDeleteButton = styled.div`
+  font-size: 0.85rem;
+  position: absolute;
+  z-index: 100;
+  bottom: 3px;
+  right: 3px;
+  background: ${theme.color.white};
+  padding: 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 2px 0px;
 `;
