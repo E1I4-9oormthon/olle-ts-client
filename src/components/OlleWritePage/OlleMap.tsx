@@ -36,12 +36,25 @@ export const OlleMap = memo(({ selectedCourseIndex }: OlleMapProps) => {
     marker.setMap(map);
     markers.push(marker);
     window.kakao.maps.event.addListener(marker, 'mouseover', () => {
-      infoWindow.setContent('<div style="padding:5px;font-size:12px;">' + markers.indexOf(marker) + '</div>');
+      infoWindow.setContent(
+        '<div style="padding:5px;font-size:12px;">' + nameRouteMarker(markers.indexOf(marker)) + '</div>',
+      );
       infoWindow.open(map, marker);
     });
     window.kakao.maps.event.addListener(marker, 'mouseout', () => {
       infoWindow.close(map, marker);
     });
+  };
+
+  const nameRouteMarker = (markerIndex: number) => {
+    switch (markerIndex) {
+      case 0:
+        return '시작 지점';
+      case 1:
+        return '끝 지점';
+      default:
+        return;
+    }
   };
 
   const addMapTypeControl = () => {
