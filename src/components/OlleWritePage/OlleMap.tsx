@@ -8,6 +8,8 @@ interface OlleMapProps {
 
 export const OlleMap = memo(({ selectedCourseIndex }: OlleMapProps) => {
   let map: any;
+  const infoWindow = new window.kakao.maps.InfoWindow({ zIndex: 1 });
+
   const createMap = () => {
     const mapContainer = document.getElementById('map'),
       mapOption = {
@@ -49,6 +51,10 @@ export const OlleMap = memo(({ selectedCourseIndex }: OlleMapProps) => {
     const marker = new window.kakao.maps.Marker({
       map: map,
       position: new window.kakao.maps.LatLng(place.y, place.x),
+    });
+    window.kakao.maps.event.addListener(marker, 'click', () => {
+      infoWindow.setContent('<div style="padding:5px;font-size:12px;background:white;">' + place.place_name + '</div>');
+      infoWindow.open(map, marker);
     });
   };
 
