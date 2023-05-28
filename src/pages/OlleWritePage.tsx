@@ -5,13 +5,14 @@ import styled from 'styled-components';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import Select from 'components/common/Select';
-import { Option } from 'global/types';
+import { courseData } from 'data/courseData';
+import { Point } from 'global/types';
 
 export const OlleWritePage = () => {
   const [gender, setGender] = useState<number>(0);
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [course, setCourse] = useState<number>(0);
-  const [route, setRoute] = useState<{ lat: number; lng: number }[]>([{ lat: 0, lng: 0 }]);
+  const [route, setRoute] = useState<Point[]>([]);
 
   const handleGenderButtonClick = (value: number) => {
     setGender(value);
