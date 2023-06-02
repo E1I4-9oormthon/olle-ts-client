@@ -1,4 +1,4 @@
-import { useEffect, memo, useState } from 'react';
+import { useEffect, memo } from 'react';
 import styled from 'styled-components';
 import { courseData } from 'data/courseData';
 import { theme } from 'styles/theme';
@@ -13,7 +13,6 @@ export const OlleMap = memo(({ selectedCourseIndex, setRoute }: OlleMapProps) =>
   let map: any;
   const infoWindow = new window.kakao.maps.InfoWindow({ zIndex: 1 });
   let markers: any[] = [];
-  const [pointInstruction, setPointInstruction] = useState<string | undefined>('시작 지점을 선택하세요.');
 
   const createMap = () => {
     const mapContainer = document.getElementById('map'),
@@ -41,7 +40,6 @@ export const OlleMap = memo(({ selectedCourseIndex, setRoute }: OlleMapProps) =>
     markers.push(marker);
     setRoute((prev) => [...prev, { lat: marker.getPosition().getLat(), lng: marker.getPosition().getLng() }]);
 
-    updateCurrentPoint(markers.length);
     window.kakao.maps.event.addListener(marker, 'mouseover', () => {
       infoWindow.setContent(
         '<div style="padding:5px;font-size:12px;">' + nameRouteMarker(markers.indexOf(marker)) + '</div>',
@@ -61,17 +59,6 @@ export const OlleMap = memo(({ selectedCourseIndex, setRoute }: OlleMapProps) =>
         return '끝 지점';
       default:
         return;
-    }
-  };
-
-  const updateCurrentPoint = (markersLength: number) => {
-    switch (markersLength) {
-      case 0:
-        return setPointInstruction('시작 지점을 선택하세요');
-      case 1:
-        return setPointInstruction('끝 지점을 선택하세요');
-      default:
-        return setPointInstruction('지점 초기화 버튼을 누르면 선택된 지점이 초기화됩니다');
     }
   };
 
@@ -135,7 +122,6 @@ export const OlleMap = memo(({ selectedCourseIndex, setRoute }: OlleMapProps) =>
     <Wrapper>
       <Map id="map"></Map>
       <RouteMarkersDeleteButton onClick={deleteMarkers}>지점 초기화</RouteMarkersDeleteButton>
-      <PointInstruction>{pointInstruction}</PointInstruction>
     </Wrapper>
   );
 });
@@ -147,18 +133,6 @@ const Wrapper = styled.div`
 const Map = styled.div`
   height: 500px;
   border-radius: 10px;
-`;
-
-const PointInstruction = styled.div`
-  font-size: 0.85rem;
-  position: absolute;
-  z-index: 100;
-  top: 3px;
-  left: 4px;
-  background: ${theme.color.white};
-  padding: 10px;
-  border-radius: 3px;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 2px 0px;
 `;
 
 const RouteMarkersDeleteButton = styled.div`
