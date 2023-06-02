@@ -8,6 +8,7 @@ import Select from 'components/common/Select';
 import { courseData } from 'data/courseData';
 import { Point } from 'global/types';
 import { OlleMap } from 'components/OlleWritePage/OlleMap';
+import { Button } from 'components/common/Button';
 
 export const OlleWritePage = () => {
   const [title, setTitle] = useState<string>('');
@@ -112,6 +113,9 @@ export const OlleWritePage = () => {
           changeHandler={(e) => handleContactChange(e.target.value)}
           value={contact}
         />
+        <SubmitButtonWrapper>
+          <Button type="submit" isActivated={isSubmittable()} name="등록하기" />
+        </SubmitButtonWrapper>
       </OlleForm>
     </Wrapper>
   );
