@@ -104,9 +104,9 @@ export const OlleWritePage = () => {
         </DayPickerWrapper>
         <InputTitle>동행과 함께할 올레길을 선택해 주세요</InputTitle>
         <Select name="kind" optionList={courseData} handleChange={(e) => handleCourseChange(e)} value={course} />
-        <OlleMapWrapper>
-          <OlleMap selectedCourseIndex={course} setRoute={setRoute} />
-        </OlleMapWrapper>
+        <InputTitle>동행 시작 시점과 끝 지점을 지정해 주세요 (선택)</InputTitle>
+        <InputSubtitle>지도를 순서대로 클릭하면 각 지점들을 지정할 수 있어요</InputSubtitle>
+        <OlleMap selectedCourseIndex={course} setRoute={setRoute} />
         <InputTitle>연락 가능한 오픈카톡 링크를 입력하세요</InputTitle>
         <Input
           placeholder="https://open.kakao.com/"
@@ -136,6 +136,11 @@ const InputTitle = styled.div`
   font-weight: 600;
 `;
 
+const InputSubtitle = styled.div`
+  margin: 1rem 0;
+  font-size: 1rem;
+`;
+
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -152,4 +157,8 @@ const DayPickerWrapper = styled.div`
 
 const OlleMapWrapper = styled.div`
   margin: 1rem 0;
+`;
+
+const SubmitButtonWrapper = styled.div`
+  margin-top: 3.5rem;
 `;
