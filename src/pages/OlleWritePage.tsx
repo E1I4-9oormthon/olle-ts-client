@@ -67,7 +67,13 @@ export const OlleWritePage = () => {
         </ButtonContainer>
         <InputTitle>동행과 함께할 날짜를 선택해 주세요</InputTitle>
         <DayPickerWrapper>
-          <DayPicker mode="single" selected={date} onSelect={(selectedDate) => handleDateSelect(selectedDate)} />
+          <DayPicker
+            mode="single"
+            selected={date}
+            disabled={{ before: new Date() }}
+            fromMonth={new Date()}
+            onSelect={(selectedDate) => handleDateSelect(selectedDate)}
+          />
         </DayPickerWrapper>
         <InputTitle>동행과 함께할 올레길을 선택해 주세요</InputTitle>
         <Select name="kind" optionList={courseData} handleChange={(e) => handleCourseChange(e)} value={course} />
