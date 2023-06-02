@@ -10,10 +10,15 @@ import { Point } from 'global/types';
 import { OlleMap } from 'components/OlleWritePage/OlleMap';
 
 export const OlleWritePage = () => {
+  const [title, setTitle] = useState<string>('');
   const [gender, setGender] = useState<number>(0);
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [course, setCourse] = useState<number>(0);
   const [route, setRoute] = useState<Point[]>([]);
+
+  const handleTitleChange = (value: string) => {
+    setTitle(value);
+  };
 
   const handleGenderButtonClick = (value: number) => {
     setGender(value);
@@ -31,7 +36,11 @@ export const OlleWritePage = () => {
     <Wrapper>
       <OlleForm>
         <InputTitle>제목을 입력하세요</InputTitle>
-        <Input placeholder="동행 제목을 입력해주세요" />
+        <Input
+          placeholder="동행 제목을 입력해주세요"
+          changeHandler={(e) => handleTitleChange(e.target.value)}
+          value={title}
+        />
         <InputTitle>동행자 성별을 선택해 주세요</InputTitle>
         <ButtonContainer>
           <ButtonWrapper>
