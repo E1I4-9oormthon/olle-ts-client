@@ -15,6 +15,7 @@ export const OlleWritePage = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [course, setCourse] = useState<number>(0);
   const [route, setRoute] = useState<Point[]>([]);
+  const [contact, setContact] = useState<string>('');
 
   const handleTitleChange = (value: string) => {
     setTitle(value);
@@ -32,6 +33,11 @@ export const OlleWritePage = () => {
     setCourse(parseInt(e.target.value));
   };
 
+  const handleContactChange = (value: string) => {
+    setContact(value);
+  };
+
+  console.log(title, gender, date, course, route, contact);
   return (
     <Wrapper>
       <OlleForm>
@@ -89,6 +95,12 @@ export const OlleWritePage = () => {
         <OlleMapWrapper>
           <OlleMap selectedCourseIndex={course} setRoute={setRoute} />
         </OlleMapWrapper>
+        <InputTitle>연락 가능한 오픈카톡 링크를 입력하세요</InputTitle>
+        <Input
+          placeholder="https://open.kakao.com/"
+          changeHandler={(e) => handleContactChange(e.target.value)}
+          value={contact}
+        />
       </OlleForm>
     </Wrapper>
   );
