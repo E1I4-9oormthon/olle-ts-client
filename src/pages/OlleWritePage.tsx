@@ -37,7 +37,9 @@ export const OlleWritePage = () => {
     setContact(value);
   };
 
-  console.log(title, gender, date, course, route, contact);
+  const isSubmittable = () => {
+    return title.length > 0 && contact.length > 0;
+  };
   return (
     <Wrapper>
       <OlleForm>
