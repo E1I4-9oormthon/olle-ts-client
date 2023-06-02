@@ -71,7 +71,9 @@ export const OlleWritePage = () => {
         </DayPickerWrapper>
         <InputTitle>동행과 함께할 올레길을 선택해 주세요</InputTitle>
         <Select name="kind" optionList={courseData} handleChange={(e) => handleCourseChange(e)} value={course} />
-        <OlleMap selectedCourseIndex={course} setRoute={setRoute} />
+        <OlleMapWrapper>
+          <OlleMap selectedCourseIndex={course} setRoute={setRoute} />
+        </OlleMapWrapper>
       </OlleForm>
     </Wrapper>
   );
@@ -104,4 +106,8 @@ const ButtonWrapper = styled.div`
 const DayPickerWrapper = styled.div`
   display: flex;
   justify-content: center;
+`;
+
+const OlleMapWrapper = styled.div`
+  margin: 1rem 0;
 `;
