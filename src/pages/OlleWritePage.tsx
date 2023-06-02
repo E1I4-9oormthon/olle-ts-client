@@ -40,9 +40,18 @@ export const OlleWritePage = () => {
   const isSubmittable = () => {
     return title.length > 0 && contact.length > 0;
   };
+
+  const handleOlleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (isSubmittable()) {
+      console.log(title, gender, date, course, route, contact);
+    }
+  };
+
   return (
     <Wrapper>
-      <OlleForm>
+      <OlleForm onSubmit={handleOlleFormSubmit}>
         <InputTitle>제목을 입력하세요</InputTitle>
         <Input
           placeholder="동행 제목을 입력해주세요"
