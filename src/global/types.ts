@@ -22,6 +22,11 @@ export interface Point {
   lng: number;
 }
 
+export interface CustomError {
+  code: string;
+  message: string;
+}
+
 declare global {
   interface Window {
     kakao: any;
