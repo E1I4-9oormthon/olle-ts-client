@@ -6,9 +6,11 @@ import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import Select from 'components/common/Select';
 import { courseData } from 'data/courseData';
-import { Point } from 'global/types';
+import { CustomError, Point } from 'global/types';
 import { OlleMap } from 'components/OlleWritePage/OlleMap';
 import { Button } from 'components/common/Button';
+import { olle } from 'apis/olle';
+import { useNavigate } from 'react-router-dom';
 
 export const OlleWritePage = () => {
   const [title, setTitle] = useState<string>('');
@@ -17,6 +19,7 @@ export const OlleWritePage = () => {
   const [course, setCourse] = useState<number>(0);
   const [route, setRoute] = useState<Point[]>([]);
   const [contact, setContact] = useState<string>('');
+  const navigate = useNavigate();
 
   const handleTitleChange = (value: string) => {
     setTitle(value);
@@ -46,7 +49,15 @@ export const OlleWritePage = () => {
     e.preventDefault();
 
     if (isSubmittable()) {
-      console.log(title, gender, date, course, route, contact);
+      try {
+        olle.createOlle({ title, prefer_gender: gender, start_date: date, course, route, contact });
+        alert('동행 제안이 완료되었습니다.');
+        navigate('/olle-list');
+      } catch (err) {
+        const error = err as CustomError;
+        alert(error.message);
+        return;
+      }
     }
   };
 
