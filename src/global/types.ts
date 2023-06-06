@@ -17,6 +17,15 @@ export interface Option {
   name: string;
 }
 
+export interface NewOlle {
+  title: string;
+  prefer_gender: number;
+  start_date: Date | undefined;
+  course: number;
+  route: Point[];
+  contact: string;
+}
+
 export interface Point {
   lat: number;
   lng: number;
