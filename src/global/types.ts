@@ -11,3 +11,33 @@ export interface Member {
 export interface ModifiableMemberInfo {
   prefer_travel: number;
 }
+
+export interface Option {
+  index: number;
+  name: string;
+}
+
+export interface NewOlle {
+  title: string;
+  prefer_gender: number;
+  start_date: Date | undefined;
+  course: number;
+  route: Point[];
+  contact: string;
+}
+
+export interface Point {
+  lat: number;
+  lng: number;
+}
+
+export interface CustomError {
+  code: string;
+  message: string;
+}
+
+declare global {
+  interface Window {
+    kakao: any;
+  }
+}

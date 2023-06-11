@@ -1,4 +1,6 @@
 import { useState, memo } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import styled from 'styled-components';
 import { theme } from 'styles/theme';
 import HomeActiveIc from 'assets/icons/home_active_ic.png';
@@ -12,6 +14,7 @@ interface NavItemProps {
   activeNavImg: string;
   inactiveNavImg: string;
   navName: string;
+  route: string;
 }
 
 interface NavNameProps {
@@ -24,16 +27,19 @@ export const BottomNavBar = memo(() => {
       name: '홈',
       activeNavImg: HomeActiveIc,
       inactiveNavImg: HomeInactiveIc,
+      route: '/',
     },
     {
       name: '제안하기',
       activeNavImg: WriteActiveIc,
       inactiveNavImg: WriteInactiveIc,
+      route: '/olle-write',
     },
     {
       name: '마이페이지',
       activeNavImg: MyActiveIc,
       inactiveNavImg: MyInactiveIc,
+      route: '/',
     },
   ];
 
@@ -45,17 +51,24 @@ export const BottomNavBar = memo(() => {
           navName={navItem.name}
           activeNavImg={navItem.activeNavImg}
           inactiveNavImg={navItem.inactiveNavImg}
+          route={navItem.route}
         />
       ))}
     </Wrapper>
   );
 });
 
-export const NavItem = memo(({ activeNavImg, inactiveNavImg, navName }: NavItemProps) => {
+export const NavItem = memo(({ activeNavImg, inactiveNavImg, navName, route }: NavItemProps) => {
+  const navigate = useNavigate();
+
   const [isHover, setIsHover] = useState<boolean>(false);
   return (
     <NavItemWrapper>
-      <NavItemBox onMouseOver={() => setIsHover(true)} onMouseOut={() => setIsHover(false)}>
+      <NavItemBox
+        onMouseOver={() => setIsHover(true)}
+        onMouseOut={() => setIsHover(false)}
+        onClick={() => navigate(route)}
+      >
         <NavImage src={isHover ? activeNavImg : inactiveNavImg} />
         <NavName isHover={isHover}>{navName}</NavName>
       </NavItemBox>

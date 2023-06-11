@@ -8,6 +8,7 @@ interface BorderButtonProps {
   isClicked?: boolean;
   value: number;
   nameAlign?: string;
+  type?: 'button' | 'submit' | 'reset';
 }
 
 interface BorderButtonBoxProps {
@@ -15,9 +16,9 @@ interface BorderButtonBoxProps {
   nameAlign?: string;
 }
 
-export const BorderButton = memo(({ handleClick, name, isClicked, value, nameAlign }: BorderButtonProps) => {
+export const BorderButton = memo(({ handleClick, name, type, isClicked, value, nameAlign }: BorderButtonProps) => {
   return (
-    <BorderButtonBox onClick={() => handleClick(value)} isClicked={isClicked} nameAlign={nameAlign}>
+    <BorderButtonBox type={type} onClick={() => handleClick(value)} isClicked={isClicked} nameAlign={nameAlign}>
       {name}
     </BorderButtonBox>
   );
@@ -48,5 +49,4 @@ const BorderButtonBox = styled.button<BorderButtonBoxProps>`
 `}
   border-radius: 8px;
   padding: 1rem;
-  margin: 1rem 0 0;
 `;
