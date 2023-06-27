@@ -12,6 +12,17 @@ const olle = {
       };
     }
   },
+  getOlleList: async () => {
+    try {
+      const olleListData = await axios.get(`/olle`, { withCredentials: true });
+      return olleListData.data.data;
+    } catch {
+      throw {
+        code: 500,
+        message: 'CANNOT_GET_MEMBER_INFO_FROM_SERVER',
+      };
+    }
+  },
 };
 
 export { olle };
