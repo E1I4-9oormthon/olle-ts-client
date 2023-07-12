@@ -17,6 +17,24 @@ export interface Option {
   name: string;
 }
 
+export interface Olle {
+  applies_count: number;
+  contact: string;
+  course: number;
+  createdAt: string;
+  olle_id: number;
+  prefer_gender: number;
+  route: Point[];
+  start_date: string;
+  title: string;
+  olle_writer: OlleWriter;
+}
+
+export interface OlleWriter {
+  nickname: string;
+  profile_image_url: string;
+}
+
 export interface NewOlle {
   title: string;
   prefer_gender: number;
