@@ -12,9 +12,14 @@ const olle = {
       };
     }
   },
-  getOlleList: async () => {
+  getOlleList: async (start: number, count: number) => {
     try {
-      const olleListData = await axios.get(`/olle`, { withCredentials: true });
+      let olleListData;
+      if (start >= 0 && count >= 0) {
+        olleListData = await axios.get(`/olle?start=${start}&count=${count}`);
+      } else {
+        olleListData = await axios.get(`/olle`);
+      }
       return olleListData.data.data;
     } catch {
       throw {
