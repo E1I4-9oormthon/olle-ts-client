@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 import { CustomError, Olle } from 'global/types';
 import { theme } from 'styles/theme';
 import { useIntersectionObserver } from 'hooks/useIntersectionObserver';
+import { member } from 'apis/member';
 
 interface PostListBottomProps {
   continueFetching: boolean;
@@ -13,6 +14,7 @@ export const OlleListPage = () => {
   const [olleList, setOlleList] = useState<Olle[]>([]);
   const [olleListPage, setOlleListPage] = useState<number>(0);
   const [continueFetching, setContinueFetching] = useState<boolean>(true);
+  const [preferTravel, setPreferTravel] = useState<number>(0);
   const intersectRef = useRef<HTMLDivElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const { isIntersect } = useIntersectionObserver(intersectRef, {
@@ -24,13 +26,13 @@ export const OlleListPage = () => {
 
   const fetchOlleList = async () => {
     try {
-      const fetchedData = await olle.getOlleList(olleListPage, COUNT);
-      if (fetchedData.length === 0) {
+      const fetchedOlleList = await olle.getOlleList(olleListPage, COUNT);
+      if (fetchedOlleList.length === 0) {
         setContinueFetching(false);
         return;
       }
 
-      const olleList = fetchedData.map((data: Olle) => ({
+      const olleList = fetchedOlleList.map((data: Olle) => ({
         applies_count: data.applies_count,
         contact: data.contact,
         course: data.course,
@@ -48,6 +50,19 @@ export const OlleListPage = () => {
     }
   };
 
+  const fetchMemberInfo = async () => {
+    try {
+      const fetchedMemberInfo = await member.getMemberInfo();
+      setPreferTravel(fetchedMemberInfo.prefer_travel);
+    } catch (err) {
+      const error = err as CustomError;
+      alert(error.message);
+    }
+  };
+  useEffect(() => {
+    fetchMemberInfo();
+  }, []);
+
   useEffect(() => {
     if (continueFetching) {
       fetchOlleList();
@@ -61,6 +76,17 @@ export const OlleListPage = () => {
       });
     }
   }, [isIntersect]);
+
+  const preferTravelText = (preferTravel: number) => {
+    switch (preferTravel) {
+      case 1:
+        return '혼자서 안전하게';
+      case 2:
+        return '말동무와 도란도란';
+      default:
+        return;
+    }
+  };
 
   const preferGenderText = (preferGender: number) => {
     switch (preferGender) {
@@ -77,7 +103,7 @@ export const OlleListPage = () => {
 
   return (
     <Wrapper>
-      <FavoriteSelectTitle>{'말동무와 도란도란'}</FavoriteSelectTitle>
+      <FavoriteSelectTitle>{preferTravelText(preferTravel)}</FavoriteSelectTitle>
       <Box>
         {olleList &&
           olleList.map((olle) => (
