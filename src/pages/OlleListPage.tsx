@@ -1,14 +1,35 @@
 import styled from 'styled-components';
 import { olle } from 'apis/olle';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { CustomError, Olle } from 'global/types';
 import { theme } from 'styles/theme';
+import { useIntersectionObserver } from 'hooks/useIntersectionObserver';
+
+interface PostListBottomProps {
+  continueFetching: boolean;
+}
 
 export const OlleListPage = () => {
-  const [olleList, setOlleList] = useState<Olle[]>();
+  const [olleList, setOlleList] = useState<Olle[]>([]);
+  const [olleListPage, setOlleListPage] = useState<number>(0);
+  const [continueFetching, setContinueFetching] = useState<boolean>(true);
+  const intersectRef = useRef<HTMLDivElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const { isIntersect } = useIntersectionObserver(intersectRef, {
+    root: rootRef.current,
+    rootMargin: '50px',
+    threshold: 0.01,
+  });
+  const COUNT = 2;
+
   const fetchOlleList = async () => {
     try {
-      const fetchedData = await olle.getOlleList();
+      const fetchedData = await olle.getOlleList(olleListPage, COUNT);
+      if (fetchedData.length === 0) {
+        setContinueFetching(false);
+        return;
+      }
+
       const olleList = fetchedData.map((data: Olle) => ({
         applies_count: data.applies_count,
         contact: data.contact,
@@ -20,15 +41,26 @@ export const OlleListPage = () => {
         olle_id: data.olle_id,
         olle_writer: data.olle_writer,
       }));
-      setOlleList(olleList);
+      setOlleList((prev) => [...prev, ...olleList]);
     } catch (err) {
       const error = err as CustomError;
       alert(error.message);
     }
   };
+
   useEffect(() => {
-    fetchOlleList();
-  }, []);
+    if (continueFetching) {
+      fetchOlleList();
+    }
+  }, [olleListPage]);
+
+  useEffect(() => {
+    if (isIntersect && olleList.length >= 0 && olleListPage >= 0) {
+      setOlleListPage((prev) => {
+        return prev + COUNT;
+      });
+    }
+  }, [isIntersect]);
 
   const preferGenderText = (preferGender: number) => {
     switch (preferGender) {
@@ -62,9 +94,22 @@ export const OlleListPage = () => {
             </OlleWrapper>
           ))}
       </Box>
+      <PostListBottom continueFetching={continueFetching} ref={intersectRef}>
+        LOADING...
+      </PostListBottom>
     </Wrapper>
   );
 };
+
+const PostListBottom = styled.div<PostListBottomProps>`
+  ${({ continueFetching }) =>
+    !continueFetching &&
+    `
+    display: none !important;
+  `}
+  text-align: center;
+  padding: 1rem 0;
+`;
 
 const Wrapper = styled.div`
   min-height: 100%;
